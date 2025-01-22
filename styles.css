@@ -96,6 +96,7 @@ body {
             display: flex;
             flex-direction: column;
             row-gap: 20px;
+            overflow-y: scroll;
 
             .container__person {
                 border: 1px solid lightgray;
@@ -118,6 +119,10 @@ body {
 
             span:last-of-type {
                 font-weight: 500;
+            }
+
+            &.hidden {
+                visibility: hidden;
             }
         
         }
