@@ -4,13 +4,17 @@ const btnShowMillionaires = document.getElementById('show-millionaires');
 const btnSortMillionaries = document.getElementById('sort-millionaires');
 const btnCalculateTotal = document.getElementById('calculate-wealth');
 const containerUsers = document.getElementById('container__users');
-const total = document.getElementById('total');
+const sumaryTotal = document.getElementById('total');
+const containerTotal = document.getElementById('container-total');
 
 let users = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     btnAddUser.addEventListener('click', addUser);
     btnDoubleMoney.addEventListener('click', doubleMoney);
+    btnShowMillionaires.addEventListener('click', showMillionaires);
+    btnSortMillionaries.addEventListener('click', sortMillionaires);
+    btnCalculateTotal.addEventListener('click', calculateWealth);
 });
 
 async function getRandomUser() {
@@ -39,6 +43,22 @@ function doubleMoney() {
     }));
     updateUI();
 }
+
+function showMillionaires() {
+    users = users.filter(user => user.money >= 1_000_000);
+    updateUI();
+}
+
+function sortMillionaires() {
+    users.sort((userA, userB) => userB.money - userA.money);
+    updateUI();
+}
+
+function calculateWealth() {
+    const totalValue = users.reduce((accumulator, currentValue) => accumulator + currentValue.money, 0);
+    sumaryTotal.textContent = getFormatCurrency(totalValue);
+    containerTotal.classList.remove('hidden');
+};
 
 function updateUI() {
     containerUsers.replaceChildren();
